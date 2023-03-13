@@ -169,6 +169,7 @@ const resetPassword = expressAsyncHandler(async (req, res) => {
         },
       }
     );
+    console.log(updatedCount);
     res.send({ message: "Password reset sucessfully" });
   }
   // else
