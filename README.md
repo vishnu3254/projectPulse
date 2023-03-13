@@ -17,6 +17,28 @@ then run the following command to install all the modules that are used in this 
 ```
   npm install
 ```
+then start the server using below command
+
+```
+  npm start
+```
+### Configurations
+  create ```.env``` folder and add the following details to the ```.env``` file
+  
+  ```
+  DB_NAME = YOUR_DB_NAME (Add your details)
+  DB_USER = YOUR_DB_USER
+  DB_PASSWORD = YOUR_DB_PASSWORD
+  PORT = PORT
+  SECRET_KEY = jdhfskjdfl
+  EMAIL_PASSWORD = EMAIL_PASSWORD (App Password)
+  EMAIL_SERVICE_PROVIDER = EMAIL_SERVICE_PASSWORD
+  EMAIL = YOUR_EMAIL
+  ```
+  
+  Create database named ```projectPulse```<br>
+  We assume that employee table is existing in a database so create table employee(attributes:{empId,empName}) and insert data into table
+
 ## Overview
 ### Roles in this project:-
 ```
