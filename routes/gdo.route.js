@@ -25,11 +25,11 @@ gdoApp.post("/gdo/projectTeam", verifyGDOToken, assignProject);
 gdoApp.post("/gdo/resourcingRequest", verifyGDOToken, rasieResourcingRequest);
 
 // get all projects under his maintanance
-gdoApp.get("/:gdoId/portfolioDashboard", verifyGDOToken, getProjects);
+gdoApp.get("/gdo/portfolioDashboard", verifyGDOToken, getProjects);
 
 // get specific project details
 gdoApp.get(
-  "/:gdoId/portfolioDashboard/:projectId",
+  "/gdo/portfolioDashboard/:projectId",
   verifyGDOToken,
   getSpecificProjectDetails
 );
