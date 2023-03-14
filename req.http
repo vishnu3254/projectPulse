@@ -3,10 +3,10 @@ POST http://localhost:4000/user-api/user
 Content-Type: application/json
 
 {
-  "userId":108,
-	"email":"wal@westagilelabs.com",
-	"username":"wal",
-	"password":"wal"
+  "userId":109,
+	"email":"testgdo@westagilelabs.com",
+	"username":"testgdo",
+	"password":"testgdo"
 }
 
 ###USER LOGIN
@@ -14,8 +14,8 @@ POST http://localhost:4000/user-api/user/login
 Content-Type: application/json
 
 {
-    "email":"ravi@westagilelabs.com",
-	  "password":"ravi"
+    "email":"testgdo@westagilelabs.com",
+	  "password":"testgdo"
 }
 
 ###FORGOT PASSWORD
@@ -48,8 +48,8 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwNCwid
 Content-Type: application/json
 
 {
-  "userId":101,
-  "role":"projectManager" 
+  "userId":109,
+  "role":"gdoHead" 
 }
 
 
@@ -61,7 +61,7 @@ GET http://localhost:4000/admin-api/admin/portfolioDashboard
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUzMDcxMSwiZXhwIjoxNjc5Mzk0NzExfQ.sPAojMx1m1J8PhPIbf-1MktYQCfUzP_o1PSYOzA9XIE
 
 ###GET SPECIFIC PROJECT DETAILS BY CLICKING ON SPECIFIC PROJECT FROM PORFOLIO DASHBOARD
-GET http://localhost:4000/admin-api/admin/portfolioDashboard/4
+GET http://localhost:4000/admin-api/admin/portfolioDashboard/20
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywidXNlclJvbGUiOiJhZG1pbiIsImlhdCI6MTY3ODUzMDcxMSwiZXhwIjoxNjc5Mzk0NzExfQ.sPAojMx1m1J8PhPIbf-1MktYQCfUzP_o1PSYOzA9XIE
 
 ###ADMIN CREATE THE PROJECT AND ASSIGN GDO, PROJECTMANAGER AND HRMANAGER TO THE PROJECT
@@ -70,9 +70,9 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywid
 Content-Type: application/json
 
 {
-  "projectName":"facebook",
+  "projectName":"testProject",
   "client":1002,
-  "gdoId":100,
+  "gdoId":109,
   "projectManager":101,
   "hrManager":102,
   "clientAccountManager":"kumar",
@@ -119,23 +119,23 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywid
 
 ###GET ALL PROJECTS UNDER GDO MAINTANANCE
 GET http://localhost:4000/gdo-api/gdo/portfolioDashboard 
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwOSwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4Nzg2MTkxLCJleHAiOjE2Nzk2NTAxOTF9.giX0VDWGEiw969blDFVIeYw4ElqhMx4oQRIg3hpuBdo
 
 ###GET SPECIFIC PROJECT DETAILS BY CLICKING ON SPECIFIC PROJECT FROM PORFOLIO DASHBOARD
-GET http://localhost:4000/gdo-api/gdo/portfolioDashboard/6
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
+GET http://localhost:4000/gdo-api/gdo/portfolioDashboard/20
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwOSwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4Nzg2MTkxLCJleHAiOjE2Nzk2NTAxOTF9.giX0VDWGEiw969blDFVIeYw4ElqhMx4oQRIg3hpuBdo
 
 
 ### ASSIGN PROJECT TO AN EXISTING EMPLOYEE BY GDO
 POST http://localhost:4000/gdo-api/gdo/projectTeam
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwOSwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4Nzg2MTkxLCJleHAiOjE2Nzk2NTAxOTF9.giX0VDWGEiw969blDFVIeYw4ElqhMx4oQRIg3hpuBdo
 Content-Type: application/json
 
 {
   "employeeprojectdetails":[
     {  
       "empId":200,
-      "projectId":6,
+      "projectId":20,
       "username":"ramesh",
       "role":"frontend",
       "startDate":"2023/03/08",
@@ -147,9 +147,9 @@ Content-Type: application/json
     },
      {  
       "empId":201,
-      "projectId":6,
+      "projectId":20,
       "username":"suresh",
-      "role":"frontend",
+      "role":"backend",
       "startDate":"2023/03/08",
       "endDate":"",
       "status":"In Progress",
@@ -185,13 +185,13 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwid
 
 ###RAISE  RESOURCING REQUEST BY GDO
 POST http://localhost:4000/gdo-api/gdo/resourcingRequest
-Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwOSwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4Nzg2MTkxLCJleHAiOjE2Nzk2NTAxOTF9.giX0VDWGEiw969blDFVIeYw4ElqhMx4oQRIg3hpuBdo
 Content-Type: application/json
 
 {
-  "gdoId" :100,
-  "projectId":1,
-  "requestDescription":"2 more days needed to complte"
+  "gdoId" :109,
+  "projectId":20,
+  "requestDescription":"2 more days needed to complete"
 }
 
 

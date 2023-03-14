@@ -6,6 +6,7 @@ const app = require("../server");
 
 // login
 test("user login", async () => {
+  // act
   let response = await request(app).post("/user-api/user/login").send({
     email:"ravi@westagilelabs.com",
     password: "ravi",
@@ -19,6 +20,8 @@ test("user login", async () => {
 
 // testing get all the projects
 test("Get all projects by admin", async () => {
+  // arrange
+  // act
   let response = await request(app)
     .get("/admin-api/admin/portfolioDashboard")
     .set(
@@ -33,6 +36,8 @@ test("Get all projects by admin", async () => {
 
 // creating project test
 test("/admin-api/admin/project", async () => {
+  // arrange
+  // act
   let response = await request(app)
     .post("/admin-api/admin/project")
     .send({

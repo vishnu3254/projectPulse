@@ -19,7 +19,7 @@ const verifyProjectManagerToken = require("../middlewares/verifyProjectManagerTo
 
 // Routes for projectManager
 
-// projectUpdates by projectManager
+// projectUpdates added by projectManager
 projectManagerApp.post(
   "/projectManager/projectUpdates/:projectId",
   verifyProjectManagerToken,

@@ -49,7 +49,7 @@ const createProject = expressAsyncHandler(async (req, res) => {
   res.status(201).send({ message: "Project Created" });
 });
 
-// get projects
+// get projects by admin
 const getProjects = expressAsyncHandler(async (req, res) => {
   let projects = await Project.findAll({
     where: {
@@ -63,6 +63,7 @@ const getProjects = expressAsyncHandler(async (req, res) => {
         "hrManager",
         "domain",
         "typeOfProject",
+        "status",
       ],
     },
   });

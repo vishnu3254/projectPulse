@@ -16,7 +16,7 @@ const { Op } = require("sequelize");
 const assignProject = expressAsyncHandler(async (req, res) => {
   // insert the data into the Team Composition model
   await TeamComposition.bulkCreate(req.body.employeeprojectdetails);
-  res.status(201).send({ message: "Project assigned to Employee" });
+  res.status(201).send({ message: "project assigned to employee" });
 });
 
 // rasieResourcingRequest
@@ -28,9 +28,6 @@ const rasieResourcingRequest = expressAsyncHandler(async (req, res) => {
 
 // get all the projects under his maintance
 const getProjects = expressAsyncHandler(async (req, res) => {
-  // get the gdoId from url
-  let gdoIdFromUrl = req.params.gdoId;
-  console.log("user Id is :-", req.userId);
   // query to find all the projects for the gdoId
   let projectRecord = await Project.findAll({
     where: {
