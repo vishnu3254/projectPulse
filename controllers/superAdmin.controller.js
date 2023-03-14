@@ -13,13 +13,13 @@ const roleMapping = expressAsyncHandler(async (req, res) => {
     where: {
       userId: userId,
     },
-    attributes:{
-      exclude:['password']
-    }
+    attributes: {
+      exclude: ["password"],
+    },
   });
   // if userRecord is empty means no user found
   if (userRecord == undefined) {
-    res.send({ message: "User not found to assign the role" });
+    res.status(404).send({ message: "User not found to assign the role" });
   }
   // if user found
   else {
@@ -31,18 +31,20 @@ const roleMapping = expressAsyncHandler(async (req, res) => {
         },
       }
     );
-    res.send({ data: userRecord, message: `Role is mapped to id ${userId}` });
+    res
+      .status(200)
+      .send({ data: userRecord, message: `Role is mapped to id ${userId}` });
   }
 });
 
 // get All users
 const getAllUsers = expressAsyncHandler(async (req, res) => {
   let userRecords = await User.findAll({
-    attributes:{
-      exclude:['password']
-    }
+    attributes: {
+      exclude: ["password"],
+    },
   });
-  res.send({ message: "All users", payload: userRecords });
+  res.status(200).send({ message: "All users", payload: userRecords });
 });
 
 // exports

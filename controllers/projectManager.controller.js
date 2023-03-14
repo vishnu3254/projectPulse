@@ -32,11 +32,11 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// projectUpdates updated by projectManager
+// projectUpdates added by projectManager
 const projectUpdate = expressAsyncHandler(async (req, res) => {
   // insert the data into projectupdates model
   await ProjectUpdates.create(req.body);
-  res.send({ message: "ProjectUpdates created" });
+  res.status(201).send({ message: "ProjectUpdates created" });
 });
 
 // raise project concerns by project manager
@@ -64,7 +64,7 @@ const raiseProjectConcern = expressAsyncHandler(async (req, res) => {
       console.log("Email sent: " + info.response);
     }
   });
-  res.send({ message: "Project Concern Raised...." });
+  res.status(201).send({ message: "Project Concern Raised...." });
 });
 
 // getProjectsForProjectManager
@@ -75,7 +75,7 @@ const getProjectsForProjectManager = expressAsyncHandler(async (req, res) => {
   // query to find all the projects under his maintanance
   let projectRecords = await Project.findAll({
     where: {
-      // get the projectManagerId from request 
+      // get the projectManagerId from request
       projectManager: req.userId,
       status: true,
     },
@@ -92,11 +92,11 @@ const getProjectsForProjectManager = expressAsyncHandler(async (req, res) => {
   });
   // if theere are no projects for projectManager
   if (projectRecords.length == 0) {
-    res.send({ message: "Sorry You don't have any  projects" });
+    res.status(204).send({ message: "Sorry You don't have any  projects" });
   }
   // if there are projects
   else {
-    res.send({
+    res.status(200).send({
       message: `All projects for ${projectManagerIdFromUrl}`,
       payload: projectRecords,
     });
@@ -154,7 +154,7 @@ const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
     });
 
     // send response
-    res.send({
+    res.status(200).send({
       message: `Project Detaitls for projectId ${projectIdFromUrl}`,
       projectFitness: projectFitness,
       teamSize: teamSize,
@@ -162,9 +162,8 @@ const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
       payload: projectRecord,
       projectUpdates: projectUpdatedBeforeTwoWeeks,
     });
-  }
-  else{
-    res.send({message:"Project not found"})
+  } else {
+    res.status(204).send({ message: "Project not found" });
   }
 });
 
@@ -176,7 +175,7 @@ const updateProjectUpdates = expressAsyncHandler(async (req, res) => {
       id: req.params.id,
     },
   });
-  res.send({ message: "project update updated" });
+  res.status(200).send({ message: "project update updated" });
 });
 
 // deleteProjectUpdates
@@ -187,7 +186,7 @@ const deleteProjectUpdates = expressAsyncHandler(async (req, res) => {
       id: req.params.id,
     },
   });
-  res.send({ message: "Project update deleted" });
+  res.status(200).send({ message: "Project update deleted" });
 });
 
 // updateProjectConcerns
@@ -198,7 +197,7 @@ const updateProjectConcerns = expressAsyncHandler(async (req, res) => {
       id: req.params.id,
     },
   });
-  res.send({ message: "Project concern is updated" });
+  res.status(200).send({ message: "Project concern is updated" });
 });
 
 // deleteProjectConcerns
@@ -209,7 +208,7 @@ const deleteProjectConcerns = expressAsyncHandler(async (req, res) => {
       id: req.params.id,
     },
   });
-  res.send({ message: "project concern deleted" });
+  res.status(200).send({ message: "project concern deleted" });
 });
 
 // exports
