@@ -25,8 +25,7 @@ const gdoApp = require("./routes/gdo.route");
 // import projectManagerApp
 const projectManagerApp = require("./routes/projectManager.route");
 
-const port = process.env.PORT || 4000;
-app.listen(port, () => console.log(`Server is running on ${port}...`));
+
 
 // check sequelize connection
 sequelize
@@ -63,3 +62,7 @@ app.use("*", (req, res) => {
 app.use((err, req, res, next) => {
   res.send({ message: err.message });
 });
+
+
+// import app
+module.exports = app

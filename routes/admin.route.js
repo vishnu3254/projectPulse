@@ -45,7 +45,7 @@ adminApp.delete(
 );
 
 // get the resource requests
-adminApp.get("/admin/resourceRequest", getAllResourceRequests);
+adminApp.get("/admin/resourceRequest", verifyAdminToken,getAllResourceRequests);
 
 // export adminApi
 module.exports = adminApp;

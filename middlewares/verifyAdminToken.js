@@ -21,6 +21,7 @@ const verifyAdminToken = expressAsyncHandler(async (req, res, next) => {
       let decodedToken = jwt.verify(token, process.env.SECRET_KEY);
       // check the role
       if (decodedToken.userRole == "admin") {
+        req.userId = decodedToken.userId;
         next();
       } else {
         res.send({ message: "You have no Permission. UnAuthorized Access" });
