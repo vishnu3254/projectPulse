@@ -46,7 +46,7 @@ Project.TeamComposition = Project.hasMany(TeamComposition, {
 const createProject = expressAsyncHandler(async (req, res) => {
   // insert the data from body to project model
   await Project.create(req.body);
-  res.send({ message: "Project Created" });
+  res.status(201).send({ message: "Project Created" });
 });
 
 // get projects
@@ -68,11 +68,11 @@ const getProjects = expressAsyncHandler(async (req, res) => {
   });
   // if there are no projects
   if (projects.length == 0) {
-    res.send({ message: "No Projects Available" });
+    res.status(404).send({ message: "No Projects Available" });
   }
   // if there are projects display them
   else {
-    res.send({ message: "All projects", payload: projects });
+    res.status(200).send({ message: "All projects", payload: projects });
   }
 });
 
@@ -124,7 +124,7 @@ const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
   });
 
   // send response
-  res.send({
+  res.status(200).send({
     message: `Project Detaitls for projectId ${projectIdFromUrl}`,
     projectFitness: projectFitness,
     teamSize: teamSize,
@@ -144,27 +144,14 @@ const updateProject = expressAsyncHandler(async (req, res) => {
   });
   // check if project is updated correctly or not
   if (updatedRecord == 0) {
-    res.send({ message: "Project not updated.." });
+    res.status(304).send({ message: "Project not updated.." });
   } else {
-    res.send({ message: "Project Updated.." });
+    res.status(200).send({ message: "Project Updated.." });
   }
 });
 
-// Delete project
+// Delete project (soft delete)
 const deleteProject = expressAsyncHandler(async (req, res) => {
-  // query to delete the project here i am doing hard delete
-  // let deletedRecord = await Project.destroy({
-  //   where: {
-  //     projectId: req.params.projectId,
-  //   },
-  // });
-  // // if deletedRecord is 0 then project is not deleted
-  // if (deleteProject == 0) {
-  //   res.send({ message: "Unable to delete the project" });
-  // } else {
-  //   res.send({ message: "Project deleted successfully.." });
-  // }
-
   // update the status for performing soft delete
   await Project.update(
     { status: false },
@@ -182,7 +169,7 @@ const deleteProject = expressAsyncHandler(async (req, res) => {
 const getAllResourceRequests = expressAsyncHandler(async (req, res) => {
   // query to get the resource data
   let resouceRequestRecords = await ResourcingRequest.findAll();
-  res.send({ message: resouceRequestRecords });
+  res.status(200).send({ message: resouceRequestRecords });
 });
 
 // export controllers

@@ -4,28 +4,26 @@ const expressAsyncHandler = require("express-async-handler");
 // import TeamCompostion Model
 const { TeamComposition } = require("../models/teamComposition.model");
 
-//import Employee Model
-const { Employee } = require("../models/employee.model");
-
 // import project Model
 const { Project } = require("../models/project.model");
 
 // import ResourcingRequest model
 const { ResourcingRequest } = require("../models/resourcingRequest.model");
+
 const { Op } = require("sequelize");
 
 // Assigning projects
 const assignProject = expressAsyncHandler(async (req, res) => {
   // insert the data into the Team Composition model
   await TeamComposition.bulkCreate(req.body.employeeprojectdetails);
-  res.send({ message: "Project assigned to Employee" });
+  res.status(201).send({ message: "Project assigned to Employee" });
 });
 
 // rasieResourcingRequest
 const rasieResourcingRequest = expressAsyncHandler(async (req, res) => {
   // insert the data into resourcingRequest model
   await ResourcingRequest.create(req.body);
-  res.send({ message: "resourcing request raised" });
+  res.status(201).send({ message: "resourcing request raised" });
 });
 
 // get all the projects under his maintance
@@ -51,11 +49,11 @@ const getProjects = expressAsyncHandler(async (req, res) => {
   });
   // if there are no projects for gdo
   if (projectRecord.length == 0) {
-    res.send({ message: "sorry No projects for You..." });
+    res.status(204).send({ message: "sorry No projects for You..." });
   }
   // if there are projects
   else {
-    res.send({
+    res.status(200).send({
       message: `All Projects for gdo ${gdoIdFromUrl}`,
       payload: projectRecord,
     });
@@ -114,7 +112,7 @@ const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
     });
 
     // send response
-    res.send({
+    res.status(200).send({
       message: `Project Detaitls for projectId ${projectIdFromUrl}`,
       projectFitness: projectFitness,
       teamSize: teamSize,
@@ -123,7 +121,7 @@ const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
       projectUpdates: projectUpdatedBeforeTwoWeeks,
     });
   } else {
-    res.send({ message: "project not found" });
+    res.status(204).send({ message: "project not found" });
   }
 });
 
@@ -135,7 +133,7 @@ const updateEmployeeDetailsInProject = expressAsyncHandler(async (req, res) => {
       empId: req.body.empId,
     },
   });
-  res.send({ message: "Employee Updated" });
+  res.status(200).send({ message: "Employee Updated" });
 });
 
 // deletEmployeeFromProject
@@ -144,9 +142,10 @@ const deletEmployeeFromProject = expressAsyncHandler(async (req, res) => {
   await TeamComposition.destroy({
     where: {
       empId: req.params.empId,
+      projectId: req.params.projectId,
     },
   });
-  res.send({ message: "Employee deleted from the project" });
+  res.status(200).send({ message: "Employee deleted from the project" });
 });
 
 // exports

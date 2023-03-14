@@ -41,7 +41,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 
   // if the user is not existed in our company then restrict the resgitration process
   if (userExistenceInWal == undefined) {
-    res.send({
+    res.status(401).send({
       message: "Unauthorized access You are not belongs to this company",
     });
   }
@@ -57,7 +57,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 
     // if user found already
     if (userRecord != undefined) {
-      res.send({ message: "User already found with that email" });
+      res.status(200).send({ message: "User already found with that email" });
     }
 
     // if user not exists insert the data into the database
@@ -66,7 +66,7 @@ const registerUser = expressAsyncHandler(async (req, res) => {
       let hashedPassword = await bcryptjs.hash(password, 6);
       req.body.password = hashedPassword;
       await User.create(req.body);
-      res.send({ message: "User Registered" });
+      res.status(201).send({ message: "User Registered" });
     }
   }
 });
@@ -83,7 +83,7 @@ const loginUser = expressAsyncHandler(async (req, res) => {
   });
   // if user not found
   if (userRecord == undefined) {
-    res.send({ message: `User not found with id ${userId}` });
+    res.status(404).send({ message: `User not found with id ${userId}` });
   }
   // if user found check password
   else {
@@ -93,7 +93,7 @@ const loginUser = expressAsyncHandler(async (req, res) => {
     );
     // if password not matched
     if (!checkPassword) {
-      res.send({ message: "Incorrect password" });
+      res.status(401).send({ message: "Incorrect password" });
     } else {
       // create a jwt token
       let signedToken = jwt.sign(
@@ -108,7 +108,7 @@ const loginUser = expressAsyncHandler(async (req, res) => {
       );
       // delete the password in userRecord object while displaying the object
       delete userRecord.dataValues.password;
-      res.send({
+      res.status(200).send({
         message: "Login successfull",
         payload: signedToken,
         user: userRecord,
@@ -150,7 +150,7 @@ const forgotPassword = expressAsyncHandler(async (req, res) => {
   //   delete otps[req.body.email];
   // }, 600000000);
 
-  res.send({ message: "Otp is sent to your email..." });
+  res.status(200).send({ message: "Otp is sent to your email..." });
 });
 
 // reset password
@@ -170,11 +170,11 @@ const resetPassword = expressAsyncHandler(async (req, res) => {
       }
     );
     console.log(updatedCount);
-    res.send({ message: "Password reset sucessfully" });
+    res.status(200).send({ message: "Password reset sucessfully" });
   }
   // else
   else {
-    res.send({ message: "Invalid OTP" });
+    res.status(401).send({ message: "Invalid OTP" });
   }
 });
 

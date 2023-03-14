@@ -43,7 +43,7 @@ gdoApp.put(
 
 // delete team member from the project
 gdoApp.delete(
-  "/gdo/projectTeam/employee/:empId",
+  "/gdo/projectTeam/projectId/:projectId/employee/:empId",
   verifyGDOToken,
   deletEmployeeFromProject
 );
