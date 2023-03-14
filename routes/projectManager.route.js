@@ -35,7 +35,8 @@ projectManagerApp.post(
 
 // get all the projects maintained by projectManager
 projectManagerApp.get(
-  "/:projectManagerId/portfolioDashboard",
+  "/projectManager/portfolioDashboard",
+  verifyProjectManagerToken,
   getProjectsForProjectManager
 );
 
@@ -49,6 +50,7 @@ projectManagerApp.put(
 // get the indetail details for specific project
 projectManagerApp.get(
   "/projectManager/portfolioDashboard/:projectId",
+  verifyProjectManagerToken,
   getSpecificProjectDetails
 );
 

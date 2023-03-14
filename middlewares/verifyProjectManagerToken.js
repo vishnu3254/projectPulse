@@ -22,6 +22,7 @@ const verifyProjectManagerToken = expressAsyncHandler(
         let decodedToken = jwt.verify(token, process.env.SECRET_KEY);
         // check the role
         if (decodedToken.userRole == "projectManager") {
+          req.userId = decodedToken.userId;
           next();
         }
         // if user is not GDO-HEAD then no permission
