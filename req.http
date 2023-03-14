@@ -14,8 +14,8 @@ POST http://localhost:4000/user-api/user/login
 Content-Type: application/json
 
 {
-    "userId":107,
-	  "password":"vishnu"
+    "email":"ravi@westagilelabs.com",
+	  "password":"ravi"
 }
 
 ###FORGOT PASSWORD

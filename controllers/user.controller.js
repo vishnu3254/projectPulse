@@ -73,12 +73,12 @@ const registerUser = expressAsyncHandler(async (req, res) => {
 
 // user Login
 const loginUser = expressAsyncHandler(async (req, res) => {
-  // get the userId and password from body
-  let { userId, password } = req.body;
-  // check the user existence using userId
+  // get the email and password from body
+  let { email, password } = req.body;
+  // check the user existence using email
   let userRecord = await User.findOne({
     where: {
-      userId: userId,
+      email: email,
     },
   });
   // if user not found
