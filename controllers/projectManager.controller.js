@@ -132,6 +132,7 @@ const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
     let dateBeforeTwoWeeks = new Date();
     dateBeforeTwoWeeks.setDate(today.getDate() - 14);
 
+    // lazy loading getProjectUpdates means get Association    
     let projectUpdatedBeforeTwoWeeks = await projectRecord.getProjectUpdates({
       where: {
         date: {
