@@ -70,9 +70,9 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywid
 Content-Type: application/json
 
 {
-  "projectName":"TNWRIMS",
+  "projectName":"sales",
   "client":1001,
-  "gdoId":106,
+  "gdoId":100,
   "projectManager":101,
   "hrManager":102,
   "clientAccountManager":"kumar",
@@ -118,11 +118,11 @@ Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMywid
 ### ------------------------------------------------------------FOR GDO LOGIN---------------------------------------------------
 
 ###GET ALL PROJECTS UNDER GDO MAINTANANCE
-GET http://localhost:4000/gdo-api/106/portfolioDashboard 
+GET http://localhost:4000/gdo-api/gdo/portfolioDashboard 
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
 
 ###GET SPECIFIC PROJECT DETAILS BY CLICKING ON SPECIFIC PROJECT FROM PORFOLIO DASHBOARD
-GET http://localhost:4000/gdo-api/106/portfolioDashboard/4
+GET http://localhost:4000/gdo-api/gdo/portfolioDashboard/5
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEwMCwidXNlclJvbGUiOiJnZG9IZWFkIiwiaWF0IjoxNjc4NTMwNjM0LCJleHAiOjE2NzkzOTQ2MzR9.RzFr2tJbT5DC5wOPOhT1cCuvpMzT1icVIsooaIh2yk8
 
 
@@ -135,7 +135,7 @@ Content-Type: application/json
   "employeeprojectdetails":[
     {  
       "empId":200,
-      "projectId":4,
+      "projectId":5,
       "username":"ramesh",
       "role":"frontend",
       "startDate":"2023/03/08",
@@ -147,7 +147,7 @@ Content-Type: application/json
     },
      {  
       "empId":201,
-      "projectId":4,
+      "projectId":5,
       "username":"suresh",
       "role":"frontend",
       "startDate":"2023/03/08",

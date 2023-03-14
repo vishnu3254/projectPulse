@@ -21,6 +21,7 @@ const verifyGDOToken = expressAsyncHandler(async (req, res, next) => {
       let decodedToken = jwt.verify(token, process.env.SECRET_KEY);
       // check the role
       if (decodedToken.userRole == "gdoHead") {
+        req.userId = decodedToken.userId;
         next();
       }
       // if user is not GDO-HEAD then no permission

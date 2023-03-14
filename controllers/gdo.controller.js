@@ -32,15 +32,15 @@ const rasieResourcingRequest = expressAsyncHandler(async (req, res) => {
 const getProjects = expressAsyncHandler(async (req, res) => {
   // get the gdoId from url
   let gdoIdFromUrl = req.params.gdoId;
+  console.log("user Id is :-", req.userId);
   // query to find all the projects for the gdoId
   let projectRecord = await Project.findAll({
     where: {
-      gdoId: gdoIdFromUrl,
+      gdoId: req.userId,
       status: true,
     },
     attributes: {
       exclude: [
-        "projectId",
         "gdoId",
         "projectManager",
         "hrManager",
@@ -72,7 +72,7 @@ const getSpecificProjectDetails = expressAsyncHandler(async (req, res) => {
   let projectRecord = await Project.findOne({
     where: {
       projectId: projectIdFromUrl,
-      gdoId: gdoIdFromUrl,
+      gdoId: req.userId,
       status: true,
     },
 
