@@ -71,10 +71,11 @@ const raiseProjectConcern = expressAsyncHandler(async (req, res) => {
 const getProjectsForProjectManager = expressAsyncHandler(async (req, res) => {
   // get the projectManagerId from url
   let projectManagerIdFromUrl = req.params.projectManagerId;
+  console.log(req.userId);
   // query to find all the projects under his maintanance
   let projectRecords = await Project.findAll({
     where: {
-      projectManager: projectManagerIdFromUrl,
+      projectManager: req.userId,
       status: true,
     },
     attributes: {
