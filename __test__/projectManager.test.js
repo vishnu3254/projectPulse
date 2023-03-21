@@ -42,5 +42,5 @@ test("all the projects associated with projectManager should be read", async () 
     );
 
   // assertion
-  expect(res.status).toBe()
+  expect(res.status).toBe(200)
 });
