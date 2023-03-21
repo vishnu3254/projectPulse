@@ -35,7 +35,7 @@ test("Get all projects by admin", async () => {
 });
 
 // creating project test
-test("/admin-api/admin/project", async () => {
+test("project should be created", async () => {
   // arrange
   // act
   let response = await request(app)
