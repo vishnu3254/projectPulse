@@ -21,7 +21,7 @@ const verifyProjectManagerToken = require("../middlewares/verifyProjectManagerTo
 
 // projectUpdates added by projectManager
 projectManagerApp.post(
-  "/projectManager/projectUpdates/:projectId",
+  "/projectManager/projectUpdates/project/:projectId",
   verifyProjectManagerToken,
   projectUpdate
 );
@@ -42,35 +42,35 @@ projectManagerApp.get(
 
 // update the project updates
 projectManagerApp.put(
-  "/projectManager/projectUpdates/:id",
+  "/projectManager/projectUpdates/project/:id",
   verifyProjectManagerToken,
   updateProjectUpdates
 );
 
 // get the indetail details for specific project
 projectManagerApp.get(
-  "/projectManager/portfolioDashboard/:projectId",
+  "/projectManager/portfolioDashboard/project/:projectId",
   verifyProjectManagerToken,
   getSpecificProjectDetails
 );
 
 // delete project updates
 projectManagerApp.delete(
-  "/projectManager/projectUpdates/:id",
+  "/projectManager/projectUpdates/project/:id",
   verifyProjectManagerToken,
   deleteProjectUpdates
 );
 
 // update the project concerns
 projectManagerApp.put(
-  "/projectManager/projectConcern/:id",
+  "/projectManager/projectConcern/project/:id",
   verifyProjectManagerToken,
   updateProjectConcerns
 );
 
 // delete project concerns
 projectManagerApp.delete(
-  "/projectManager/projectConcern/:id",
+  "/projectManager/projectConcern/project/:id",
   deleteProjectConcerns
 );
 

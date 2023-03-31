@@ -15,7 +15,7 @@ const { Op } = require("sequelize");
 // Assigning projects
 const assignProject = expressAsyncHandler(async (req, res) => {
   // insert the data into the Team Composition model
-  await TeamComposition.bulkCreate(req.body.employeeprojectdetails);
+  await TeamComposition.create(req.body);
   res.status(201).send({ message: "project assigned to employee" });
 });
 
@@ -51,7 +51,7 @@ const getProjects = expressAsyncHandler(async (req, res) => {
   // if there are projects
   else {
     res.status(200).send({
-      message: `All Projects for gdo ${gdoIdFromUrl}`,
+      message: `All Projects for gdo`,
       payload: projectRecord,
     });
   }

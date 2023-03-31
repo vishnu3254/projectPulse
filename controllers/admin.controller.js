@@ -57,19 +57,18 @@ const getProjects = expressAsyncHandler(async (req, res) => {
     },
     attributes: {
       exclude: [
-        "projectId",
-        "gdoId",
-        "projectManager",
-        "hrManager",
-        "domain",
-        "typeOfProject",
-        "status",
+        // "gdoId",
+        // "projectManager",
+        // "hrManager",
+        // "domain",
+        // "typeOfProject",
+        // "status",
       ],
     },
   });
   // if there are no projects
   if (projects.length == 0) {
-    res.status(404).send({ message: "No Projects Available" });
+    res.status(200).send({ message: "No Projects Available" });
   }
   // if there are projects display them
   else {
@@ -170,8 +169,15 @@ const deleteProject = expressAsyncHandler(async (req, res) => {
 // getAllResourceRequests
 const getAllResourceRequests = expressAsyncHandler(async (req, res) => {
   // query to get the resource data
-  let resouceRequestRecords = await ResourcingRequest.findAll();
-  res.status(200).send({ message: resouceRequestRecords });
+  let resouceRequestRecords = await ResourcingRequest.findAll({
+    where: {
+      projectId: req.params.projectId,
+    },
+  });
+  res.status(200).send({
+    message: "All Resource requests",
+    payload: resouceRequestRecords,
+  });
 });
 
 // export controllers

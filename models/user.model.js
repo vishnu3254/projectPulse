@@ -11,6 +11,7 @@ exports.User = sequelize.define(
   {
     userId: {
       type: DataTypes.INTEGER,
+      autoIncrement: true,
       primaryKey: true,
     },
     username: {

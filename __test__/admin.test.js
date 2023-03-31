@@ -5,7 +5,7 @@ const request = require("supertest");
 const app = require("../server");
 
 // login
-test("user login", async () => {
+test("user should login", async () => {
   // act
   let response = await request(app).post("/user-api/user/login").send({
     email:"ravi@westagilelabs.com",

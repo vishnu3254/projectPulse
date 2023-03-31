@@ -28,46 +28,30 @@ const { Employee } = require("../models/employee.model");
 // import user model
 const { User } = require("../models/user.model");
 
+// regitser user
 const registerUser = expressAsyncHandler(async (req, res) => {
   // get the body from request
-  let { userId, email, username, password } = req.body;
+  let { email, username, password } = req.body;
 
-  // check the user is existed in our company database or not
-  let userExistenceInWal = await Employee.findOne({
+  // check if the employee already exists with that email
+  let userRecord = await User.findOne({
     where: {
-      empId: userId,
+      email: email,
     },
   });
 
-  // if the user is not existed in our company then restrict the resgitration process
-  if (userExistenceInWal == undefined) {
-    res.status(401).send({
-      message: "Unauthorized access You are not belongs to this company",
-    });
+  // if user found already
+  if (userRecord != undefined) {
+    res.status(200).send({ message: "User already found with that email" });
   }
 
-  // if the user existed in company database
+  // if user not exists insert the data into the database
   else {
-    // check if the employee already exists with that email
-    let userRecord = await User.findOne({
-      where: {
-        email: email,
-      },
-    });
-
-    // if user found already
-    if (userRecord != undefined) {
-      res.status(200).send({ message: "User already found with that email" });
-    }
-
-    // if user not exists insert the data into the database
-    else {
-      // hash the password
-      let hashedPassword = await bcryptjs.hash(password, 6);
-      req.body.password = hashedPassword;
-      await User.create(req.body);
-      res.status(201).send({ message: "User Registered" });
-    }
+    // hash the password
+    let hashedPassword = await bcryptjs.hash(password, 6);
+    req.body.password = hashedPassword;
+    await User.create(req.body);
+    res.status(201).send({ message: "User Registered" });
   }
 });
 
@@ -83,7 +67,7 @@ const loginUser = expressAsyncHandler(async (req, res) => {
   });
   // if user not found
   if (userRecord == undefined) {
-    res.status(404).send({ message: `User not found with id ${userId}` });
+    res.status(200).send({ message: `User not found with id ${email}` });
   }
   // if user found check password
   else {
@@ -93,7 +77,7 @@ const loginUser = expressAsyncHandler(async (req, res) => {
     );
     // if password not matched
     if (!checkPassword) {
-      res.status(401).send({ message: "Incorrect password" });
+      res.status(200).send({ message: "Incorrect password" });
     } else {
       // create a jwt token
       let signedToken = jwt.sign(
@@ -144,11 +128,11 @@ const forgotPassword = expressAsyncHandler(async (req, res) => {
     }
   });
 
-  //setting validity to OTP for 10min
-  // setTimeout(() => {
-  //   //delete OTP from object
-  //   delete otps[req.body.email];
-  // }, 600000000);
+  // setting validity to OTP for 10min
+  setTimeout(() => {
+    //delete OTP from object
+    delete otps[req.body.email];
+  }, 600000);
 
   res.status(200).send({ message: "Otp is sent to your email..." });
 });
@@ -174,7 +158,7 @@ const resetPassword = expressAsyncHandler(async (req, res) => {
   }
   // else
   else {
-    res.status(401).send({ message: "Invalid OTP" });
+    res.status(200).send({ message: "Invalid OTP" });
   }
 });
 
