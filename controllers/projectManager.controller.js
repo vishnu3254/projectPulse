@@ -78,7 +78,6 @@ const getProjectsForProjectManager = expressAsyncHandler(async (req, res) => {
     },
     attributes: {
       exclude: [
-        "projectId",
         "gdoId",
         "projectManager",
         "hrManager",
@@ -89,12 +88,12 @@ const getProjectsForProjectManager = expressAsyncHandler(async (req, res) => {
   });
   // if theere are no projects for projectManager
   if (projectRecords.length == 0) {
-    res.status(204).send({ message: "Sorry You don't have any  projects" });
+    res.status(200).send({ message: "Sorry You don't have any  projects" });
   }
   // if there are projects
   else {
     res.status(200).send({
-      message: `All projects for ${projectManagerIdFromUrl}`,
+      message: `All projects for ${req.userId}`,
       payload: projectRecords,
     });
   }

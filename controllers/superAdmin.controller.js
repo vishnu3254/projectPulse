@@ -26,14 +26,12 @@ const roleMapping = expressAsyncHandler(async (req, res) => {
 
   // if user found
   else {
-    let updatedUserRecord = await User.update(
-      { role: role },
-      {
-        where: {
-          userId: userId,
-        },
-      }
-    );
+    console.log("in Update role");
+    let updatedUserRecord = await User.update(req.body, {
+      where: {
+        userId: userId,
+      },
+    });
     res
       .status(200)
       .send({ data: userRecord, message: `Role is mapped to id ${userId}` });
@@ -50,5 +48,18 @@ const getAllUsers = expressAsyncHandler(async (req, res) => {
   res.status(200).send({ message: "All users", payload: userRecords });
 });
 
+// dlete user
+const deleteUser = expressAsyncHandler(async (req, res) => {
+  // get the data from url params
+  let userIdFromUrl = req.params.userId;
+
+  await User.destroy({
+    where: {
+      userId: userIdFromUrl,
+    },
+  });
+  res.send({ message: "User deleted Successfully" });
+});
+
 // exports
-module.exports = { roleMapping, getAllUsers };
+module.exports = { roleMapping, getAllUsers, deleteUser };

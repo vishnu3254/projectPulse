@@ -22,7 +22,7 @@ adminApp.get("/admin/portfolioDashboard", verifyAdminToken, getProjects);
 
 // get specific project details by clicking on specific project
 adminApp.get(
-  "/admin/portfolioDashboard/:projectId",
+  "/admin/portfolioDashboard/project/:projectId",
   verifyAdminToken,
   getSpecificProjectDetails
 );
@@ -32,7 +32,7 @@ adminApp.post("/admin/project", verifyAdminToken, createProject);
 
 // update the existing project by admin
 adminApp.put(
-  "/admin/portfolioDashboard/project/:projectId",
+  "/admin/portfolioDashboard/project",
   verifyAdminToken,
   updateProject
 );
@@ -45,7 +45,11 @@ adminApp.delete(
 );
 
 // get the resource requests
-adminApp.get("/admin/resourceRequest", verifyAdminToken,getAllResourceRequests);
+adminApp.get(
+  "/admin/resourceRequest/project/:projectId",
+  verifyAdminToken,
+  getAllResourceRequests
+);
 
 // export adminApi
 module.exports = adminApp;

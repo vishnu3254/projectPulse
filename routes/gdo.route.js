@@ -29,7 +29,7 @@ gdoApp.get("/gdo/portfolioDashboard", verifyGDOToken, getProjects);
 
 // get specific project details
 gdoApp.get(
-  "/gdo/portfolioDashboard/:projectId",
+  "/gdo/portfolioDashboard/project/:projectId",
   verifyGDOToken,
   getSpecificProjectDetails
 );

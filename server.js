@@ -1,9 +1,19 @@
 // import express
 const express = require("express");
 
+// import helmet
+const helmet = require("helmet")
+
+// import cors
+const cors = require("cors");
+
 // create express obj application
 const app = express();
 
+app.use(helmet())
+
+// cors
+app.use(cors());
 // dotenv
 require("dotenv").config();
 
@@ -24,8 +34,8 @@ const gdoApp = require("./routes/gdo.route");
 
 // import projectManagerApp
 const projectManagerApp = require("./routes/projectManager.route");
-
-
+const expressAsyncHandler = require("express-async-handler");
+const { User } = require("./models/user.model");
 
 // check sequelize connection
 sequelize
@@ -54,6 +64,54 @@ app.use("/gdo-api", gdoApp);
 // path middleware for projectManager
 app.use("/projectManager-api", projectManagerApp);
 
+//get gdo details to display as select list while creating a project
+app.get(
+  "/gdo",
+  expressAsyncHandler(async (req, res) => {
+    let gdoRecord = await User.findAll({
+      where: {
+        role: "gdoHead",
+      },
+    });
+    res.send({ message: "All GDO's", payload: gdoRecord });
+  })
+);
+
+// get all projectManager details
+app.get(
+  "/projectManager",
+  expressAsyncHandler(async (req, res) => {
+    let projectManagerRecord = await User.findAll({
+      where: {
+        role: "projectManager",
+      },
+    });
+    res.send({ message: "All project Manager", payload: projectManagerRecord });
+  })
+);
+
+// get all hrManager details
+app.get(
+  "/hrManager",
+  expressAsyncHandler(async (req, res) => {
+    let hrManagerRecord = await User.findAll({
+      where: {
+        role: "hrManager",
+      },
+    });
+    res.send({ message: "all Hr managers", payload: hrManagerRecord });
+  })
+);
+
+//get employees for team composition
+app.get(
+  "/employees",
+  expressAsyncHandler(async (req, res) => {
+    let [employeeRecord] = await sequelize.query("select * from employees");
+    res.send({ message: "All employees", payload: employeeRecord });
+  })
+);
+
 // invalid path
 app.use("*", (req, res) => {
   res.send({ message: "Invalid path" });
@@ -63,6 +121,5 @@ app.use((err, req, res, next) => {
   res.send({ message: err.message });
 });
 
-
 // import app
-module.exports = app
+module.exports = app;
